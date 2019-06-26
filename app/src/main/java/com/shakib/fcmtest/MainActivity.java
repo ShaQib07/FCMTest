@@ -22,8 +22,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -66,17 +64,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //getting FCM token
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
 
-                if (task.isSuccessful()){
-                    String mtoken = task.getResult().getToken();
-                }
-            }
-        });
-        //getting FCM token
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (mAuth.getCurrentUser() != null){
+
+            startProfileActivity();
+
+        }
 
     }
 
