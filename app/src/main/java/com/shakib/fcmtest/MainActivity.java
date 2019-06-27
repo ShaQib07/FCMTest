@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CHANNEL_ID = "FCM_ID";
+    public static final String CHANNEL_ID = "FCM_ID";
     private static final String CHANNEL_NAME = "FCM";
     private static final String CHANNEL_DESC = "FCM desc";
 

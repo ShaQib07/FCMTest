@@ -14,10 +14,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class ProfileActivity extends AppCompatActivity {
 
     public static final String NODE_USERS = "users";
+    public static final String TOPIC_NAME = "updates";
     private FirebaseAuth mAuth;
 
     @Override
@@ -26,6 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_NAME);
 
         //getting FCM token
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
@@ -41,20 +45,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         //getting FCM token
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (mAuth.getCurrentUser() == null){
-
-            Intent intent = new Intent(this,MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |  Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-
-        }
 
     }
 
